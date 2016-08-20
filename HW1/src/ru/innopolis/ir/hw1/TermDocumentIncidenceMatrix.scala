@@ -4,7 +4,6 @@ import scala.collection.immutable.SortedMap
 
 /**
   * @author Timur Kasatkin
-  * @date 19.08.16.
   * @email aronwest001@gmail.com
   * @email t.kasatkin@innopolis.ru
   */
@@ -63,7 +62,7 @@ private class BinaryVector(binaryNumberStr: String) {
 
 	private def or(char1: Char, char2: Char): Char = if (char1 == '0' && char2 == '0') '0' else '1'
 
-	def not: BinaryVector = BinaryVector(binaryNumString.map(not(_)))
+	def unary_! : BinaryVector = BinaryVector(binaryNumString.map(not))
 
 	private def not(char: Char): Char = if (char == '0') '1' else '0'
 
