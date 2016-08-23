@@ -1,4 +1,4 @@
-package ru.innopolis.ir.hw1
+package ru.innopolis.ir.hw.hw1
 
 /**
   * @author Timur Kasatkin 

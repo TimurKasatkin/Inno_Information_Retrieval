@@ -1,4 +1,4 @@
-package ru.innopolis.ir.hw1
+package ru.innopolis.ir.hw.hw1
 
 import scala.collection.immutable.SortedMap
 
