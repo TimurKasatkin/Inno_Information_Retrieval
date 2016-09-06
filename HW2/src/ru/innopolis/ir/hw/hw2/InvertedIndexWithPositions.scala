@@ -4,6 +4,7 @@ import java.lang.System.{lineSeparator => lineSep}
 
 import scala.collection.immutable.SortedMap
 import scala.collection.mutable.ListBuffer
+import scala.math.abs
 import scala.util.control.Breaks._
 
 /**
@@ -79,31 +80,22 @@ class InvertedIndexWithPositions(terms: Iterable[(String, Int, Int)]) {
 			val (docId1, docId2) = (p1().elem._1, p2().elem._1)
 			if (docId1 == docId2) {
 				val l = ListBuffer.empty[Int]
-				val (positions1, positions2) = (p1().elem._2.iterator, p2().elem._2.iterator)
-				var (pp1, pp2) = (positions1.nextOrDefault, positions2.nextOrDefault)
-				while (pp1.isDefined) {
-//					breakable {
-//						for (pp2 <- p2().elem._2) {
-//							if (math.abs(pp1() - pp2) <= k)
-//								l += pp2
-//							else if (pp2 > pp1())
-//								break
-//						}
-//					}
+				val positions2 = p2().elem._2.iterator
+				var pp2 = positions2.nextOrDefault
+				for (pp1 <- p1().elem._2) {
 					breakable {
 						while (pp2.isDefined) {
-							if (math.abs(pp1() - pp2()) <= k)
+							if (abs(pp1 - pp2()) <= k)
 								l += pp2()
-							else if (pp2() > pp1())
+							else if (pp2() > pp1)
 								break
 							pp2 = positions2.nextOrDefault
 						}
 					}
-					while (l.nonEmpty && math.abs(l.head - pp1()) > k)
+					while (l.nonEmpty && abs(l.head - pp1) > k)
 						l.remove(0)
 					for (ps <- l)
-						result += Tuple3(docId1, pp1(), ps)
-					pp1 = positions1.nextOrDefault
+						result += Tuple3(docId1, pp1, ps)
 				}
 				p1 = postings1.nextOrDefault
 				p2 = postings2.nextOrDefault
