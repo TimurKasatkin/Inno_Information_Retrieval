@@ -18,6 +18,25 @@ package object index {
 			case (h, ((d, v), y)) => min(min(h + 1, v + 1), d + (if (x == y) 0 else 1))
 		}) last
 
+	def editDistance(s1: String, s2: String) = {
+		val m = Array.fill(s1.length + 1 , s2.length + 1)(0)
+		for (i <- 1 to s1.length)
+			m(i)(0) = i
+		for (j <- 1 to s2.length)
+			m(0)(j) = j
+		for {
+			i <- 1 to s1.length
+			j <- 1 to s2.length
+		} {
+			m(i)(j) = List(
+				m(i - 1)(j - 1) + (if (s1(i - 1) == s2(j - 1)) 0 else 1),
+				m(i - 1)(j) + 1,
+				m(i)(j - 1) + 1
+			).min
+		}
+		m.last.last
+	}
+
 	implicit class StringUtils(string: String) {
 		def editDist(other: String): Int = editDistance(string, other)
 

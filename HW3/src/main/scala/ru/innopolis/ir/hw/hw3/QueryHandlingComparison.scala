@@ -21,7 +21,7 @@ object QueryHandlingComparison {
 	def main(args: Array[String]): Unit = {
 		//Tokenization
 		val docs = TxtDocumentsParser(getClass.getClassLoader.getResource("articles").getPath)
-		val tokens: IterableView[(String, Int), Iterable[_]] = docs.view.flatMap(DocumentTokenizer(STOP_WORDS_TOKENIZER))
+		val tokens = docs.view.flatMap(DocumentTokenizer(STOP_WORDS_TOKENIZER))
 		val docsMap = docs.map(d => d.id -> d).toMap
 		val nMostFrequentWords = wordFrequency(tokens.map(_._1))
 			.toSeq
@@ -41,6 +41,6 @@ object QueryHandlingComparison {
 
 		printResult(permutermSpellingCorrectionIndex.corrected("prosttics"))
 
-		printResult(kGramSpellingCorrectionIndex.corrected("prosttics"))
+//		printResult(kGramSpellingCorrectionIndex.corrected("prosttics"))
 	}
 }

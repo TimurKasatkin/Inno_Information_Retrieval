@@ -19,14 +19,14 @@ class BiGramSpellingCorrectionIndex private(terms: Iterable[(String, Int)]) exte
 		.map(_._1)
 		.distinct
 		.flatMap(term => term.nGrams(2).map((_, term)))
-		.foldLeft(Map.empty[String, SortedSet[String]])((res, t) => res + (t._1 -> (res.getOrElse(t._1, SortedSet.empty) + t._2)))
+		.foldLeft(Map.empty[String, SortedSet[String]])((res, t) => res + (t._1 -> (res.getOrElse(t._1, SortedSet.empty[String]) + t._2)))
 
 
 	private val standardInvertedIndex = StandardInvertedIndex(terms)
 
 	override def corrected(q: String): List[(String, List[Int])] = {
 		val termSets = q.nGrams(2)
-			.map(bigramDictionary.getOrElse(_, SortedSet.empty))
+			.map(bigramDictionary.getOrElse(_, SortedSet.empty[String]))
 			.filter(_.nonEmpty)
 			.toList
 		for (termSetsCombination <- termSets.combinations((termSets.length * COMMON_BIGRAMS_THRESHOLD).ceil.toInt)) {
