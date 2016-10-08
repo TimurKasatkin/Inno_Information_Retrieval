@@ -1,0 +1,40 @@
+In combinatorics, an expander graph is a sparse graph that has strong connectivity properties, quantified using vertex, edge or spectral expansion as described below. Expander constructions have spawned research in pure and applied mathematics, with several applications to complexity theory, design of robust computer networks, and the theory of error-correcting codes.
+Intuitively, an expander is a finite, undirected multigraph in which every subset of the vertices that is not "too large" has a "large" boundary. Different formalisations of these notions give rise to different notions of expanders: edge expanders, vertex expanders, and spectral expanders, as defined below.
+A disconnected graph is not an expander, since the boundary of a connected component is empty. Every connected graph is an expander; however, different connected graphs have different expansion parameters. The complete graph has the best expansion property, but it has largest possible degree. Informally, a graph is a good expander if it has low degree and high expansion parameters.
+The edge expansion (also isoperimetric number or Cheeger constant) h(G) of a graph G on n vertices is defined as
+where 
+In the equation, the minimum is over all nonempty sets S of at most n/2 vertices and S is the edge boundary of S, i.e., the set of edges with exactly one endpoint in S.
+The vertex isoperimetric number  (also vertex expansion or magnification) of a graph G is defined as
+where  is the outer boundary of S, i.e., the set of vertices in  with at least one neighbor in S. In a variant of this definition (called unique neighbor expansion)  is replaced by the set of vertices in V with exactly one neighbor in S.
+The vertex isoperimetric number  of a graph G is defined as
+where  is the inner boundary of S, i.e., the set of vertices in S with at least one neighbor in .
+When G is ''d''-regular, a linear algebraic definition of expansion is possible based on the eigenvalues of the adjacency matrix A = A(G) of G, where  is the number of edges between vertices i and j. Because A is symmetric, the spectral theorem implies that A has n real-valued eigenvalues . It is known that all these eigenvalues are in [d, d].
+Because G is regular, the uniform distribution  with  for all i = 1, ..., n is the stationary distribution of G. That is, we have Au = du, and u is an eigenvector of A with eigenvalue 1 = d, where d is the degree of the vertices of G. The spectral gap of G is defined to be d2, and it measures the spectral expansion of the graph G.
+It is known that n = d if and only if G is bipartite. In many contexts, for example in the expander mixing lemma, a bound on 2 is not enough, but indeed it is necessary to bound the absolute value of all the eigenvalues away from d:
+Since this is the largest eigenvalue corresponding to an eigenvector orthogonal to u, it can be equivalently defined using the Rayleigh quotient:
+where 
+is the 2-norm of the vector .
+The normalized versions of these definitions are also widely used and more convenient in stating some results. Here one considers the matrix , which is the Markov transition matrix of the graph G. Its eigenvalues are between 1 and 1. For not necessarily regular graphs, the spectrum of a graph can be defined similarly using the eigenvalues of the Laplacian matrix. For directed graphs, one considers the singular values of the adjacency matrix A, which are equal to the roots of the eigenvalues of the symmetric matrix ATA.
+The expansion parameters defined above are related to each other. In particular, for any d-regular graph G,
+Consequently, for constant degree graphs, vertex and edge expansion are qualitatively the same.
+When G is d-regular, there is a relationship between h(G) and the spectral gap d 2 of G. An inequality due to Tanner and independently Alon and Milman states that
+This inequality is closely related to the Cheeger bound for Markov chains and can be seen as a discrete version of Cheeger's inequality in Riemannian geometry.
+Similar connections between vertex isoperimetric numbers and the spectral gap have also been studied:
+Asymptotically speaking, the quantities , , and  are all bounded above by the spectral gap .
+There are three general strategies for constructing families of expander graphs. The first strategy is algebraic and group-theoretic, the second strategy is analytic and uses additive combinatorics, and the third strategy is combinatorial and uses the zig-zag and related graphs products. Noga Alon showed that certain graphs constructed from finite geometries are the sparsest examples of highly expanding graphs.
+Algebraic constructions based on Cayley graphs are known for various variants of expander graphs. The following construction is due to Margulis and has been analysed by Gabber and Galil. For every natural number n, one considers the graph Gn with the vertex set , where : For every vertex , its eight adjacent vertices are
+Then the following holds:
+Theorem. For all n, the graph Gn has second-largest eigenvalue .
+By a theorem of Alon and Boppana, all large enough d-regular graphs satisfy , where is the second largest eigenvalue in absolute value. Ramanujan graphs are d-regular graphs for which this bound is tight. That is, they satisfy . Hence Ramanujan graphs have an asymptotically smallest possible . They are also excellent spectral expanders.
+Lubotzky, Phillips, and Sarnak (1988), Margulis (1988), and Morgenstern (1994) show how Ramanujan graphs can be constructed explicitly. By a theorem of Friedman (2003), random d-regular graphs on n vertices are almost Ramanujan, that is, they satisfy
+with probability  as n tends to infinity.
+The original motivation for expanders is to build economical robust networks (phone or computer): an expander with bounded valence is precisely an asymptotic robust graph with number of edges growing linearly with size (number of vertices), for all subsets.
+Expander graphs have found extensive applications in computer science, in designing algorithms, error correcting codes, extractors, pseudorandom generators, sorting networks () and robust computer networks. They have also been used in proofs of many important results in computational complexity theory, such as SL=L () and the PCP theorem (). In cryptography, expander graphs are used to construct hash functions.
+The following are some properties of expander graphs that have proven useful in many areas.
+The expander mixing lemma states that, for any two subsets of the vertices S, T V, the number of edges between S and T is approximately what you would expect in a random d-regular graph. The approximation is better the smaller  is. In a random d-regular graph, as well as in an ErdsRnyi random graph with edge probability d/n, we expect  edges between S and T.
+More formally, let E(S, T) denote the number of edges between S and T. If the two sets are not disjoint, edges in their intersection are counted twice, that is,
+Then the expander mixing lemma says that the following inequality holds:
+where is the absolute value of the normalized second largest eigenvalue.
+The Chernoff bound states that, when sampling many independent samples from a random variables in the range [1, 1], with high probability the average of our samples is close to the expectation of the random variable. The expander walk sampling lemma, due to  and , states that this also holds true when sampling from a walk on an expander graph. This is particularly useful in the theory of derandomization, since sampling according to an expander walk uses many fewer random bits than sampling independently.
+Textbooks and surveys
+Research articles
